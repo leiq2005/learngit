@@ -9,5 +9,7 @@ ssh-keygen -t rsa -C "leiq2005@126.com" 生成账号对应SSH
 git remote add origin git@github.com:leiq2005/doc.git  在GitHub上增加原始仓库
 git remote rm origin  删除
 git push -u origin master 本地仓库同步到远程
+git push origin master 推送到远程仓库
 
 git diff
+
