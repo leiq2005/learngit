@@ -1,5 +1,10 @@
 git init               初始化一个Git仓库
-git add <file>
-git commit
+git add <file>         仓库中添加文件
+git commit -m "message info" 提交仓库中的文件并添加提交信息
 
-git status 查询当前状态
+git status 查询仓库当前状态
+
+ssh-keygen -t rsa -C "leiq2005@126.com" 生成账号对应SSH
+
+git remote add origin git@github.com:leiq2005/doc.git  在GitHub上增加原始仓库
+git push -u origin master 本地仓库同步到远程
