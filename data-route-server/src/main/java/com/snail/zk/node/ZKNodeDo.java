@@ -24,7 +24,7 @@ public class ZKNodeDo {
 				_.out("[init] "+path);
 			}
 			//临时节点
-			String path = zk.create("/ClientGroup/"+Conf.IP_PORT, "client ip:port".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+			String path = zk.create("/ClientGroup/"+Conf.SELF_IP_PORT, "client ip:port".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 			_.out("[init] "+path);
 			
 			

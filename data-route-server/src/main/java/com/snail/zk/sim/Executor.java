@@ -63,7 +63,7 @@ public class Executor
         	String x[] = new String[2];
         	x[0]="1";
         	x[1]="1";
-            new Executor(Conf.connect, "/lei", "sss", x).run();
+            new Executor(Conf.CONNECT_1_GYC_TEST, "/lei", "sss", x).run();
         } catch (Exception e) {
             e.printStackTrace();
         }

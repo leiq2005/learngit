@@ -54,7 +54,7 @@ public class _ {
 			}
 		});
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		_.out("[输出已排序 Num:"+a.length+"]");
+		_.out("[输出已排序 Num:"+a.length+" SessionId:"+Long.toHexString(zk.getSessionId())+"]");
 		_.outList(a);
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		return parent;

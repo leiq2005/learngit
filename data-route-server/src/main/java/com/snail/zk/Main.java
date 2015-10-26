@@ -1,6 +1,8 @@
 package com.snail.zk;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.zookeeper.ZooKeeper;
@@ -10,25 +12,69 @@ import com.snail.zk.node.ZKNodeDo;
 
 public class Main {
 
-
+	private static String ip_port = Conf.CONNECT_1_GYC_TEST;//默认
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
+			BufferedReader strin = new BufferedReader(new InputStreamReader(System.in));  
+			while(true){
+				_.out("请选择命名服务器，回车默认1");
+				_.out("1-"+Conf.CONNECT_1_GYC_TEST);
+				_.out("2-"+Conf.CONNECT_2_GYC_RES);
+				_.out("3-"+Conf.CONNECT_3_DG_TEST);
+				String str = strin.readLine();
+				if(!(str.equals("1") || str.equals("2") || str.equals("3"))){
+					if("".equals(str)){
+						break;
+					}
+					_.out("命令错误，请重新输入");
+				}else{
+					int sn = Integer.parseInt(str);
+                	switch(sn)
+                	{
+                	case 1: 
+                		ip_port = Conf.CONNECT_1_GYC_TEST;
+                		break;
+                	case 2: 
+                		ip_port = Conf.CONNECT_2_GYC_RES;
+                		break;
+                	case 3: 
+                		ip_port = Conf.CONNECT_3_DG_TEST;
+                		break;	
+                	}
+                	break;
+				}
+			}
+			
 			CountDownLatch connectedSignal = new CountDownLatch(1);
-			ZooKeeper zk = new ZooKeeper(Conf.connect, Conf.timeout, new MyWatcher(connectedSignal));
+			ZooKeeper zk = new ZooKeeper(ip_port, Conf.timeout, new MyWatcher(connectedSignal));
 			connectedSignal.await();
-			_.out("connected server:"+Conf.connect);
+			_.out("connected server:"+ip_port + " SessionId:"+Long.toHexString(zk.getSessionId()));
 			//初始化目录树
 			ZKNodeDo.initDic(zk);
 			//创建自己节点
+            
+            while(true){
+            	_.out("请输入命令：1-显示目录 2-退出");
+            	String str = strin.readLine();
+            	if(str.equals("1") || str.equals("2")){
+            		int cmd = Integer.parseInt(str);
+                	switch(cmd)
+                	{
+                	case 1: 
+                		ZKNode node = _.outDicTree(zk);
+                		break;
+                	case 2:
+                		System.exit(0);
+                		break;
+                	}
+            	}
+            	else{
+            		_.out("命令错误，请重新输入");
+            	}
+            }
 			
-			for(int i = 0; i < 50; i++){
-				ZKNode node = _.outDicTree(zk);
-				Thread.sleep(2000);
-			}
-			
-			
-			Thread.sleep(3000000);
+			//Thread.sleep(3000000);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,5 +83,4 @@ public class Main {
 			e.printStackTrace();
 		} 
 	}
-
 }
