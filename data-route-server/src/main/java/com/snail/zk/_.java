@@ -18,6 +18,7 @@ import com.snail.zk.node.ZKNode;
 public class _ {
 	public static void out(String str){
 		System.out.println(preFix() + str);
+		//System.out.println(String.format("serverId %s %s", serverId, msg));
 	}
 	private static String preFix(){
 		return "->";
