@@ -33,6 +33,7 @@ public class _ {
 			out(str);
 		}
 	}
+
 	public static void outDicTree(ZKNode node){
 		
 	}
@@ -56,7 +57,10 @@ public class _ {
 		});
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		_.out("[输出已排序 Num:"+a.length+" SessionId:"+Long.toHexString(zk.getSessionId())+"]");
+		
 		_.outList(a);
+		_.out("状态："+zk.getState());
+		_.out("SessionPasswd："+zk.getSessionPasswd().toString());
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		return parent;
 	}
