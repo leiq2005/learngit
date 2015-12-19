@@ -18,6 +18,7 @@ import com.snail.zk.node.ZKNode;
 public class _ {
 	public static void out(String str){
 		System.out.println(preFix() + str);
+		//System.out.println(String.format("serverId %s %s", serverId, msg));
 	}
 	private static String preFix(){
 		return "->";
@@ -32,6 +33,7 @@ public class _ {
 			out(str);
 		}
 	}
+
 	public static void outDicTree(ZKNode node){
 		
 	}
@@ -54,8 +56,11 @@ public class _ {
 			}
 		});
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		_.out("[输出已排序 Num:"+a.length+"]");
+		_.out("[输出已排序 Num:"+a.length+" SessionId:"+Long.toHexString(zk.getSessionId())+"]");
+		
 		_.outList(a);
+		_.out("状态："+zk.getState());
+		_.out("SessionPasswd："+zk.getSessionPasswd().toString());
 		_.out("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		return parent;
 	}

@@ -52,18 +52,18 @@ public class Executor
 //                    .println("USAGE: Executor hostPort znode filename program [args ...]");
 //            System.exit(2);
 //        }
-        String hostPort = args[0];
-        String znode = args[1];
-        String filename = args[2];
-        String exec[] = new String[args.length - 3];
-        System.arraycopy(args, 3, exec, 0, exec.length);
+//        String hostPort = args[0];
+//        String znode = args[1];
+//        String filename = args[2];
+//        String exec[] = new String[args.length - 3];
+//        System.arraycopy(args, 3, exec, 0, exec.length);
         try {
         	
             //new Executor(hostPort, znode, filename, exec).run();
-        	String x[] = new String[2];
-        	x[0]="1";
-        	x[1]="1";
-            new Executor(Conf.connect, "/lei", "sss", x).run();
+        	String x[] = new String[1];
+        	x[0]="ipconfig";
+        	//x[1]="1";
+            new Executor(Conf.CONNECT_2_GYC_RES, "/lei", "sss", x).run();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,11 +89,7 @@ public class Executor
         }
     }
 
-    public void closing(int rc) {
-        synchronized (this) {
-            notifyAll();
-        }
-    }
+
 
     static class StreamWriter extends Thread {
         OutputStream os;
@@ -118,7 +114,11 @@ public class Executor
 
         }
     }
-
+    public void closing(int rc) {
+        synchronized (this) {
+            notifyAll();
+        }
+    }
     public void exists(byte[] data) {
         if (data == null) {
             if (child != null) {
